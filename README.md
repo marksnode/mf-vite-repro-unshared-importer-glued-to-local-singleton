@@ -60,7 +60,8 @@ all of them type-only imports at runtime).
 
 ## Fix
 
-Unshared workspace importers go back to the loadShare proxy (the manifest closure is not evidence of an evaluation
-cycle), and the eager workspace singleton wrapper no longer throws when it is evaluated above its own fallback inside a
-merged chunk (#1209): it leaves its exports unassigned until the deferred cache write applies them, so the case #1210
-covered stays safe without the ordinary edge.
+Unshared workspace importers are still recognized (#1210), but the cycle test for them walks the imports the shared
+package **evaluates** — its source files and those of the workspace packages they pull in, `import type` /
+`export type` dropped, `node_modules` treated as leaves — instead of the manifest closure. `aaa-runtime` never imports
+`mid-types` at runtime, so `zzz-hooks` stays on the proxy and the widget reads the host's copy (`RESULT OK`); a genuine
+evaluation cycle (marksnode/mf-vite-repro-cycle-guard-skips-unshared-workspace-importer) still keeps its ordinary edge.
