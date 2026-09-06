@@ -1,0 +1,1 @@
+{"name": "aaa-runtime", "version": "1.0.0", "type": "module", "main": "index.js", "dependencies": {"mid-types": "file:../lib-types"}}

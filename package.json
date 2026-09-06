@@ -1,0 +1,21 @@
+{
+    "name": "mf-vite-repro-unshared-importer-glued-to-local-singleton",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "vite build --config remote/vite.config.js && vite build --config host/vite.config.js",
+        "preview:remote": "vite preview --config remote/vite.config.js --port 4181 --strictPort",
+        "preview:host": "vite preview --config host/vite.config.js --port 4180 --strictPort",
+        "check": "node check.mjs"
+    },
+    "dependencies": {
+        "aaa-runtime": "file:lib-runtime",
+        "mid-types": "file:lib-types",
+        "zzz-hooks": "file:lib-hooks"
+    },
+    "devDependencies": {
+        "@module-federation/vite": "https://pkg.pr.new/@module-federation/vite@82013b2",
+        "playwright": "^1.59.1",
+        "vite": "^8.2.1"
+    }
+}
